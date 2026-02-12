@@ -9,23 +9,39 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@200..800&display=swap" rel="stylesheet">
     <style>
+      :root {
+        --primary: #F56DB5;
+        --bg: #FDFCFB;
+        --surface: #FFFFFF;
+        --text: #1C1917;
+      }
       body {
         font-family: 'Plus Jakarta Sans', sans-serif;
-        background-color: #fdfcfb;
+        background-color: #f5f5f5; /* Subtle gray for the desktop background */
+        color: var(--text);
+        margin: 0;
+        padding: 0;
       }
       .font-serif {
         font-family: 'Playfair Display', serif;
       }
-      .bg-premium-gradient {
-        background: linear-gradient(135deg, #fdfcfb 0%, #f7f1e9 100%);
+      /* Smooth transitions for interactive elements */
+      .transition-premium {
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
       }
+      /* Floating effect for CTA */
       @keyframes float {
         0% { transform: translateY(0px); }
-        50% { transform: translateY(-10px); }
+        50% { transform: translateY(-8px); }
         100% { transform: translateY(0px); }
       }
       .animate-float {
-        animation: float 3s ease-in-out infinite;
+        animation: float 4s ease-in-out infinite;
+      }
+      /* Hide scrollbar but keep functionality */
+      ::-webkit-scrollbar {
+        width: 0px;
+        background: transparent;
       }
     </style>
     <script type="importmap">
