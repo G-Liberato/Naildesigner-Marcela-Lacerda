@@ -43,23 +43,6 @@ const EXPERT = {
   ]
 };
 
-const Section = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
-  <section className={`py-12 px-6 ${className}`}>
-    {children}
-  </section>
-);
-
-const ButtonCTA = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
-  <a 
-    href={EXPERT.whatsappUrl}
-    target="_blank"
-    rel="noopener noreferrer"
-    className={`flex items-center justify-center gap-2 w-full py-5 rounded-2xl font-bold text-white uppercase tracking-widest shadow-xl transition-all active:scale-95 bg-[#F56DB5] ${className}`}
-  >
-    {children}
-  </a>
-);
-
 export default function App() {
   const [selectedImg, setSelectedImg] = useState<string | null>(null);
 
@@ -72,228 +55,250 @@ export default function App() {
   }, [selectedImg]);
 
   return (
-    <div className="app-container overflow-x-hidden">
+    <div className="app-container">
       
       {/* Lightbox */}
       {selectedImg && (
         <div 
-          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
+          className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4 backdrop-blur-sm"
           onClick={() => setSelectedImg(null)}
         >
-          <button className="absolute top-6 right-6 text-white"><X size={32} /></button>
-          <img src={selectedImg} alt="Preview" className="max-w-full max-h-[80vh] rounded-lg object-contain shadow-2xl" />
+          <button className="absolute top-8 right-8 text-white p-2">
+            <X size={32} />
+          </button>
+          <img 
+            src={selectedImg} 
+            alt="Preview" 
+            className="max-w-full max-h-[85vh] rounded-2xl object-contain shadow-2xl transition-all duration-300 scale-100" 
+          />
         </div>
       )}
 
-      {/* Hero Section */}
-      <section className="relative h-[90vh] w-full">
+      {/* 1. HERO SECTION */}
+      <section className="relative h-[92vh] w-full overflow-hidden">
         <div className="absolute inset-0">
-          <img src={EXPERT.heroImg} alt="Marcela Lacerda Hero" className="w-full h-full object-cover object-top" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#FDFCFB] via-transparent to-black/30" />
+          <img src={EXPERT.heroImg} alt="Marcela Lacerda" className="w-full h-full object-cover object-top" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#FDFCFB] via-transparent to-black/20" />
         </div>
         
         <div className="relative h-full flex flex-col justify-end p-8 pb-12">
-          <div className="flex items-center gap-2 mb-4 bg-white/20 backdrop-blur-md w-fit px-3 py-1 rounded-full border border-white/30">
-            <Sparkles size={14} className="text-amber-300" />
-            <span className="text-[10px] text-white font-bold tracking-widest uppercase">Especialista em Fibra</span>
+          <div className="flex items-center gap-2 mb-6 bg-white/30 backdrop-blur-lg w-fit px-4 py-1.5 rounded-full border border-white/40 shadow-sm">
+            <Sparkles size={14} className="text-amber-200" />
+            <span className="text-[10px] text-white font-black tracking-widest uppercase">Expertise Premium</span>
           </div>
-          <h1 className="text-4xl font-serif leading-tight mb-4 text-stone-900">
-            Eu sou <span className="text-[#F56DB5] italic font-bold">{EXPERT.name}</span>, especialista em alongamento de fibra de vidro em <span className="underline decoration-[#F56DB5] decoration-2 underline-offset-4">Taquaralto</span>.
+          
+          <h1 className="text-4xl font-serif leading-tight mb-4 text-stone-900 drop-shadow-sm">
+            Eu sou <span className="text-[#F56DB5] italic font-black">{EXPERT.name}</span>, especialista em fibra de vidro em <span className="underline decoration-[#F56DB5] decoration-2 underline-offset-8">Taquaralto</span>.
           </h1>
-          <p className="text-stone-600 mb-8 leading-relaxed text-lg font-medium">
-            Unhas impecáveis, naturais e resistentes. O cuidado que você merece.
+          
+          <p className="text-stone-600 mb-8 leading-relaxed text-lg font-medium max-w-[90%]">
+            Transformando o seu olhar para as suas mãos com a naturalidade e resistência que você busca.
           </p>
-          <ButtonCTA className="animate-cta">
-            <MessageCircle size={20} fill="currentColor" />
-            Agendar via WhatsApp
-          </ButtonCTA>
-          <p className="text-center text-[11px] text-stone-400 mt-4 uppercase tracking-wider font-bold">
-            Resposta rápida • Atendimento exclusivo
+
+          <a 
+            href={EXPERT.whatsappUrl} 
+            target="_blank" 
+            className="flex items-center justify-center gap-3 bg-[#F56DB5] py-5 rounded-2xl font-black text-white uppercase tracking-widest shadow-2xl shadow-[#F56DB5]/30 active:scale-95 transition-all"
+          >
+            <MessageCircle size={22} fill="currentColor" />
+            AGENDAR VIA WHATSAPP
+          </a>
+          <p className="text-center text-[10px] text-stone-400 mt-4 uppercase tracking-[0.2em] font-bold">
+            Atendimento Rápido • Personalizado
           </p>
         </div>
       </section>
 
-      {/* About Section */}
-      <Section className="bg-white">
-        <div className="flex flex-col gap-10">
-          <div className="relative">
-            <img src={EXPERT.profileImg} alt="Marcela" className="w-full h-[450px] object-cover rounded-[2.5rem] shadow-2xl border-b-8 border-[#F56DB5]" />
-            <div className="absolute -bottom-5 -right-5 bg-[#F56DB5] p-5 rounded-3xl shadow-xl text-white">
-              <Award size={32} />
+      {/* 2. QUEM SOU EU (Autoridade) */}
+      <section className="py-20 px-8 bg-white">
+        <div className="flex flex-col gap-12">
+          <div className="relative group">
+            <img src={EXPERT.profileImg} alt="Perfil Marcela" className="w-full h-[480px] object-cover rounded-[3rem] shadow-2xl border-b-[12px] border-[#F56DB5]/20" />
+            <div className="absolute -bottom-6 -right-6 bg-white p-6 rounded-[2rem] shadow-xl border border-stone-50">
+              <Award size={40} className="text-[#F56DB5]" />
             </div>
           </div>
           <div className="space-y-6">
-            <h2 className="text-3xl font-serif text-stone-900 leading-tight">Autoridade & <br/><span className="italic text-[#F56DB5]">Paixão pela técnica</span></h2>
-            <p className="text-stone-600 leading-relaxed text-lg">
-              Trabalho com foco total na sua autoestima. Em meu studio, utilizo as técnicas mais avançadas para garantir que suas unhas fiquem finas, naturais e extremamente duradouras.
+            <h2 className="text-3xl font-serif text-stone-900 leading-tight">
+              Excelência Técnica & <br/><span className="italic text-[#F56DB5]">Propósito</span>
+            </h2>
+            <p className="text-stone-500 text-lg leading-relaxed">
+              Minha missão é entregar unhas que unem beleza e saúde. Através da fibra de vidro, proporciono um resultado ultra-fino, resistente e com acabamento de joia.
             </p>
-            <div className="grid grid-cols-1 gap-3">
+            <div className="grid grid-cols-1 gap-4">
               {[
-                "Atendimento 100% Personalizado",
-                "Foco em Naturalidade e Saúde",
-                "Materiais Premium de Alta Performance",
-                "Ambiente Confortável e Seguro"
-              ].map((item, i) => (
-                <div key={i} className="flex items-center gap-3 text-stone-700 font-semibold bg-stone-50 p-4 rounded-2xl border border-stone-100">
+                "Procedimento 100% Indolor",
+                "Foco Total em Naturalidade",
+                "Produtos de Alta Performance",
+                "Certificação Especializada"
+              ].map((text, i) => (
+                <div key={i} className="flex items-center gap-4 bg-stone-50 p-4 rounded-2xl border border-stone-100">
                   <CheckCircle2 className="text-[#F56DB5]" size={20} />
-                  {item}
+                  <span className="font-bold text-stone-700 text-sm">{text}</span>
                 </div>
               ))}
             </div>
           </div>
         </div>
-      </Section>
+      </section>
 
-      {/* Gallery Section */}
-      <Section className="bg-[#F7F1E9]/50">
-        <div className="text-center mb-10">
-          <span className="text-[#F56DB5] font-black text-[10px] uppercase tracking-[0.3em]">Portfólio Real</span>
-          <h2 className="text-3xl font-serif mt-2 text-stone-900">Resultados que <span className="italic">encantam</span></h2>
+      {/* 3. GALERIA (Resultados) */}
+      <section className="py-20 px-4 bg-[#F7F1E9]/40">
+        <div className="text-center mb-12">
+          <span className="text-[#F56DB5] font-black text-[11px] uppercase tracking-[0.4em] block mb-2">Portfolio</span>
+          <h2 className="text-3xl font-serif text-stone-900">Resultados <span className="italic">Reais</span></h2>
         </div>
         <div className="grid grid-cols-2 gap-3">
           {EXPERT.gallery.map((img, idx) => (
             <div 
               key={idx} 
-              className="aspect-square overflow-hidden rounded-2xl shadow-sm border-2 border-white cursor-pointer active:scale-95 transition-all"
+              className="aspect-square overflow-hidden rounded-2xl shadow-md border-2 border-white cursor-pointer active:scale-95 transition-all duration-300"
               onClick={() => setSelectedImg(img)}
             >
-              <img src={img} alt={`Resultado ${idx}`} className="w-full h-full object-cover" loading="lazy" />
+              <img src={img} alt={`Unha ${idx}`} className="w-full h-full object-cover" loading="lazy" />
             </div>
           ))}
         </div>
-        <p className="text-[10px] text-center text-stone-400 mt-8 italic px-4">
-          *Os resultados podem variar. Fotos reais de atendimentos realizados por Marcela Lacerda.
+        <p className="text-[10px] text-center text-stone-400 mt-10 italic px-6 leading-relaxed">
+          *Fotos reais. Os resultados variam de acordo com o biotipo e cuidados pós-procedimento.
         </p>
-      </Section>
+      </section>
 
-      {/* Why Section */}
-      <Section className="bg-white">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-serif text-stone-900">Por que me escolher?</h2>
-        </div>
-        <div className="grid grid-cols-1 gap-5">
-          <div className="flex items-start gap-4 p-6 rounded-3xl border border-stone-100 shadow-sm bg-white">
-            <div className="text-[#F56DB5] bg-[#F56DB5]/10 p-3 rounded-2xl"><ShieldCheck size={28} /></div>
+      {/* 4. DIFERENCIAIS */}
+      <section className="py-20 px-8 bg-white">
+        <h2 className="text-3xl font-serif text-stone-900 mb-12 text-center italic">Sua melhor escolha</h2>
+        <div className="grid grid-cols-1 gap-6">
+          <div className="flex gap-5 p-6 rounded-3xl bg-stone-50 border border-stone-100 shadow-sm">
+            <div className="bg-white p-4 rounded-2xl shadow-sm"><ShieldCheck size={28} className="text-[#F56DB5]" /></div>
             <div>
-              <h3 className="font-bold text-stone-900 text-lg mb-1">Biossegurança</h3>
-              <p className="text-sm text-stone-500 leading-relaxed">Materiais rigorosamente esterilizados para sua total proteção e saúde.</p>
+              <h3 className="font-black text-stone-900 mb-1">Biossegurança</h3>
+              <p className="text-sm text-stone-500">Materiais 100% descartáveis ou esterilizados para sua total segurança.</p>
             </div>
           </div>
-          <div className="flex items-start gap-4 p-6 rounded-3xl border border-stone-100 shadow-sm bg-white">
-            <div className="text-[#F56DB5] bg-[#F56DB5]/10 p-3 rounded-2xl"><Star size={28} /></div>
+          <div className="flex gap-5 p-6 rounded-3xl bg-stone-50 border border-stone-100 shadow-sm">
+            <div className="bg-white p-4 rounded-2xl shadow-sm"><Star size={28} className="text-[#F56DB5]" /></div>
             <div>
-              <h3 className="font-bold text-stone-900 text-lg mb-1">Acabamento Slim</h3>
-              <p className="text-sm text-stone-500 leading-relaxed">Técnica exclusiva para unhas finas que parecem naturais, mas são ultra resistentes.</p>
+              <h3 className="font-black text-stone-900 mb-1">Acabamento Slim</h3>
+              <p className="text-sm text-stone-500">Unhas finas como as naturais, mas com a resistência que só a fibra oferece.</p>
             </div>
           </div>
-          <div className="flex items-start gap-4 p-6 rounded-3xl border border-stone-100 shadow-sm bg-white">
-            <div className="text-[#F56DB5] bg-[#F56DB5]/10 p-3 rounded-2xl"><Clock size={28} /></div>
+          <div className="flex gap-5 p-6 rounded-3xl bg-stone-50 border border-stone-100 shadow-sm">
+            <div className="bg-white p-4 rounded-2xl shadow-sm"><Clock size={28} className="text-[#F56DB5]" /></div>
             <div>
-              <h3 className="font-bold text-stone-900 text-lg mb-1">Sua Hora é Sagrada</h3>
-              <p className="text-sm text-stone-500 leading-relaxed">Atendimento pontual e com o tempo necessário para a perfeição.</p>
+              <h3 className="font-black text-stone-900 mb-1">Sua Hora é VIP</h3>
+              <p className="text-sm text-stone-500">Atendimento individual e pontual. Sem filas, sem esperas no studio.</p>
             </div>
           </div>
         </div>
-      </Section>
+      </section>
 
-      {/* Studio Section */}
-      <Section className="bg-[#1C1917] text-white rounded-t-[3rem]">
+      {/* 5. STUDIO (Bastidores) */}
+      <section className="py-20 px-8 bg-[#1C1917] text-white rounded-t-[4rem]">
         <div className="text-center mb-12">
-          <span className="text-white/40 text-xs uppercase tracking-[0.2em] font-bold">O Studio</span>
-          <h2 className="text-3xl font-serif mt-2 text-white italic">Conforto & Aconchego</h2>
+          <span className="text-white/30 text-xs uppercase tracking-[0.3em] font-black block mb-2">Nosso Espaço</span>
+          <h2 className="text-3xl font-serif italic">Conforto & Sofisticação</h2>
         </div>
-        <div className="space-y-4 mb-8">
+        <div className="space-y-4">
           {EXPERT.studioImgs.map((img, i) => (
-            <img key={i} src={img} alt="Studio Interior" className="w-full h-72 object-cover rounded-[2rem] border-2 border-white/5 shadow-2xl" />
+            <img key={i} src={img} alt="Studio" className="w-full h-72 object-cover rounded-[2.5rem] shadow-2xl border border-white/5" />
           ))}
         </div>
-        <div className="bg-white/5 p-8 rounded-[2rem] backdrop-blur-md border border-white/10 text-center">
+        <div className="mt-10 bg-white/5 p-8 rounded-[2rem] border border-white/10 text-center">
           <p className="text-stone-300 italic text-lg leading-relaxed">
-            "Nosso espaço foi planejado para ser o seu refúgio. Um ambiente climatizado e moderno, focado em proporcionar a melhor experiência de Palmas."
+            "Um ambiente totalmente climatizado e pensado para que seu momento de beleza seja também um momento de descanso."
           </p>
         </div>
-      </Section>
+      </section>
 
-      {/* How it works */}
-      <Section className="bg-white">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-serif text-stone-900 italic">Simples e Rápido</h2>
+      {/* 6. HOW TO SCHEDULE */}
+      <section className="py-24 px-8 bg-white">
+        <h2 className="text-3xl font-serif text-stone-900 text-center mb-16 italic">Processo Simples</h2>
+        <div className="flex flex-col gap-10 max-w-[280px] mx-auto relative">
+          <div className="absolute left-6 top-4 bottom-4 w-[2px] bg-stone-100" />
+          {[
+            { step: "1", title: "WhatsApp", desc: "Clique no botão e inicie a conversa." },
+            { step: "2", title: "Agenda", desc: "Escolha seu melhor dia e horário." },
+            { step: "3", title: "Transformação", desc: "Venha viver a sua melhor versão." }
+          ].map((item, i) => (
+            <div key={i} className="flex items-center gap-6 relative z-10">
+              <div className="h-12 w-12 rounded-2xl bg-[#F56DB5] text-white flex items-center justify-center font-black text-xl shadow-lg shadow-[#F56DB5]/30">
+                {item.step}
+              </div>
+              <div>
+                <h4 className="font-black text-stone-900">{item.title}</h4>
+                <p className="text-xs text-stone-400">{item.desc}</p>
+              </div>
+            </div>
+          ))}
         </div>
-        <div className="flex flex-col gap-8 max-w-[300px] mx-auto">
-          <div className="flex items-center gap-5">
-            <div className="h-12 w-12 rounded-2xl bg-[#F56DB5] text-white flex items-center justify-center font-black text-xl shadow-lg shadow-[#F56DB5]/30">1</div>
-            <p className="text-stone-700 font-bold text-lg">WhatsApp</p>
-          </div>
-          <div className="flex items-center gap-5">
-            <div className="h-12 w-12 rounded-2xl bg-[#F56DB5] text-white flex items-center justify-center font-black text-xl shadow-lg shadow-[#F56DB5]/30">2</div>
-            <p className="text-stone-700 font-bold text-lg">Agendamento</p>
-          </div>
-          <div className="flex items-center gap-5">
-            <div className="h-12 w-12 rounded-2xl bg-[#F56DB5] text-white flex items-center justify-center font-black text-xl shadow-lg shadow-[#F56DB5]/30">3</div>
-            <p className="text-stone-700 font-bold text-lg">Execução VIP</p>
-          </div>
-        </div>
-        <div className="mt-12">
-          <ButtonCTA className="animate-cta">
+        <div className="mt-16">
+          <a 
+            href={EXPERT.whatsappUrl} 
+            target="_blank" 
+            className="flex items-center justify-center gap-3 bg-[#F56DB5] py-6 rounded-3xl font-black text-white uppercase tracking-widest shadow-2xl shadow-[#F56DB5]/30 active:scale-95 transition-all"
+          >
             <Zap size={22} fill="currentColor" />
-            GARANTIR MEU HORÁRIO
-          </ButtonCTA>
-          <p className="text-center text-xs text-stone-400 mt-4">Atendimento com hora marcada</p>
+            RESERVAR AGORA
+          </a>
         </div>
-      </Section>
+      </section>
 
-      {/* Final CTA */}
-      <Section className="bg-[#FDFCFB] text-center pt-24 pb-32">
-        <div className="inline-block p-5 bg-[#F56DB5]/10 rounded-full mb-8">
-          <Heart size={40} className="text-[#F56DB5] fill-[#F56DB5]/20 animate-pulse" />
+      {/* 7. FINAL CALL */}
+      <section className="py-24 px-8 bg-stone-50 text-center">
+        <div className="inline-block p-6 bg-white rounded-full shadow-sm mb-8">
+          <Heart size={48} className="text-[#F56DB5] fill-[#F56DB5]/10 animate-pulse" />
         </div>
-        <h2 className="text-4xl font-serif mb-6 text-stone-900">
-          Suas unhas prontas para <span className="italic text-[#F56DB5]">qualquer ocasião.</span>
+        <h2 className="text-4xl font-serif text-stone-900 mb-6 leading-tight">
+          Pronta para se <br/><span className="italic text-[#F56DB5]">apaixonar?</span>
         </h2>
-        <p className="text-stone-500 mb-10 text-lg max-w-[320px] mx-auto font-medium">
-          Agenda aberta para novas clientes. Fale comigo agora e conquiste o seu visual dos sonhos.
+        <p className="text-stone-500 mb-12 text-lg font-medium max-w-[300px] mx-auto">
+          Agenda aberta. Fale comigo agora mesmo e garanta sua transformação.
         </p>
-        <ButtonCTA className="py-7 text-xl shadow-[#F56DB5]/40">
-          CONVERSAR AGORA
-        </ButtonCTA>
-      </Section>
+        <a 
+          href={EXPERT.whatsappUrl} 
+          target="_blank" 
+          className="flex items-center justify-center gap-3 bg-[#F56DB5] py-7 rounded-3xl font-black text-white text-xl uppercase tracking-[0.2em] shadow-2xl shadow-[#F56DB5]/40 active:scale-95 transition-all"
+        >
+          WHATSAPP
+        </a>
+      </section>
 
-      {/* Footer */}
-      <footer className="bg-stone-50 py-16 px-8 text-center border-t border-stone-200">
-        <h3 className="font-serif text-2xl text-stone-900 mb-2">{EXPERT.name}</h3>
-        <p className="text-[#F56DB5] font-black text-xs uppercase tracking-[0.2em] mb-8">{EXPERT.role}</p>
+      {/* FOOTER */}
+      <footer className="bg-stone-900 py-20 px-8 text-center border-t border-white/5">
+        <h3 className="font-serif text-3xl text-white mb-2">{EXPERT.name}</h3>
+        <p className="text-[#F56DB5] font-black text-xs uppercase tracking-[0.3em] mb-10">{EXPERT.role}</p>
         
-        <div className="flex justify-center gap-4 mb-10">
-          <a href={EXPERT.instagramUrl} target="_blank" className="p-5 bg-white rounded-3xl shadow-sm text-stone-400 hover:text-[#F56DB5] border border-stone-100 transition-all">
-            <Instagram size={28} />
+        <div className="flex justify-center gap-6 mb-12">
+          <a href={EXPERT.instagramUrl} target="_blank" className="p-5 bg-white/5 rounded-[2rem] text-stone-400 hover:text-white border border-white/10 transition-colors">
+            <Instagram size={32} />
           </a>
-          <a href={EXPERT.whatsappUrl} target="_blank" className="p-5 bg-white rounded-3xl shadow-sm text-stone-400 hover:text-[#F56DB5] border border-stone-100 transition-all">
-            <MessageCircle size={28} />
+          <a href={EXPERT.whatsappUrl} target="_blank" className="p-5 bg-white/5 rounded-[2rem] text-stone-400 hover:text-white border border-white/10 transition-colors">
+            <MessageCircle size={32} />
           </a>
         </div>
         
-        <p className="flex items-center justify-center gap-2 text-stone-500 font-bold text-sm mb-12">
+        <p className="flex items-center justify-center gap-2 text-stone-500 font-bold text-sm mb-16">
           <MapPin size={18} className="text-[#F56DB5]" />
           {EXPERT.city}
         </p>
         
-        <div className="pt-10 border-t border-stone-200 text-[10px] text-stone-300 uppercase tracking-widest font-black">
-          © {new Date().getFullYear()} • Marcela Lacerda Nails
+        <div className="pt-10 border-t border-white/10 text-[10px] text-stone-600 uppercase tracking-widest font-black">
+          © {new Date().getFullYear()} • Marcela Lacerda Nails • Palmas/TO
         </div>
       </footer>
 
-      {/* Floating Action Button */}
-      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 w-[92%] max-w-[460px] z-40">
+      {/* FLOATING ACTION BUTTON */}
+      <div className="fixed bottom-8 left-1/2 -translate-x-1/2 w-[92%] z-[60] animate-float-cta">
         <a 
-          href={EXPERT.whatsappUrl}
-          target="_blank"
-          className="bg-[#F56DB5] text-white flex items-center justify-between px-7 py-5 rounded-[2rem] shadow-[0_20px_40px_rgba(245,109,181,0.4)] font-black text-sm tracking-widest group"
+          href={EXPERT.whatsappUrl} 
+          target="_blank" 
+          className="bg-[#F56DB5] text-white flex items-center justify-between px-8 py-5 rounded-[2.5rem] shadow-[0_25px_50px_-12px_rgba(245,109,181,0.6)] font-black text-xs tracking-[0.2em] uppercase"
         >
           <div className="flex items-center gap-3">
-            <MessageCircle size={22} fill="currentColor" />
+            <MessageCircle size={20} fill="currentColor" />
             <span>AGENDAR HORÁRIO</span>
           </div>
-          <ChevronRight size={22} className="group-hover:translate-x-1 transition-transform" />
+          <ChevronRight size={22} />
         </a>
       </div>
 
