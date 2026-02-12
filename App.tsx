@@ -308,9 +308,11 @@ const App: React.FC = () => {
         
         <div className="flex justify-center gap-6 mb-8">
           <a href={EXPERT.instagramUrl} target="_blank" rel="noopener noreferrer" className="p-3 bg-stone-800 rounded-full hover:text-white transition-colors" aria-label="Instagram">
+            <span className="sr-only">Instagram</span>
             <Instagram size={24} />
           </a>
           <a href={EXPERT.whatsappUrl} target="_blank" rel="noopener noreferrer" className="p-3 bg-stone-800 rounded-full hover:text-white transition-colors" aria-label="WhatsApp">
+            <span className="sr-only">WhatsApp</span>
             <MessageCircle size={24} />
           </a>
         </div>
